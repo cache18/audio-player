@@ -1,0 +1,32 @@
+<!--<form>-->
+<!--  <mat-form-field appearance="standard">-->
+<!--    <mat-label>Playlist name</mat-label>-->
+<!--    <input matInput #playlistName>-->
+<!--  </mat-form-field>-->
+<!--</form>-->
+
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+    <button mat-icon-button disabled></button>
+    <mat-checkbox class="checklist-leaf-node"
+                  [checked]="checklistSelection.isSelected(node)"
+                  (change)="musicLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+  </mat-tree-node>
+
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+    <button mat-icon-button matTreeNodeToggle
+            [attr.aria-label]="'Toggle ' + node.item">
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    <mat-checkbox [checked]="descendantsAllSelected(node)"
+                  [indeterminate]="descendantsPartiallySelected(node)"
+                  (change)="musicItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+  </mat-tree-node>
+</mat-tree>
+
+<div class="actions" fxLayoutGap="20px">
+  <button mat-raised-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button (click)="accept()" color="primary">Accept</button>
+</div>

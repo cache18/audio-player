@@ -1,0 +1,5 @@
+<div class="sound-volume" fxLayout="column" fxLayoutAlign="center center">
+  <button (click)="volumeUp()" [disabled]="audio.volume >= 1"> + </button>
+  <mat-slider vertical [(value)]="audio.volume" min="0" max="1" [step]="0.1"></mat-slider>
+  <button (click)="volumeDown()" [disabled]="audio.volume <= 0"> - </button>
+</div>

@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  mongo:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+  app:
+    image: music-player-backend:latest
+    ports:
+      - "8080:8080"
+    environment:
+      MONGO_URL: mongodb://mongo:27017
+      MONGO_DB: test
+      LIBRARY_ROOT: /Music
+    depends_on:
+      - mongo
+    volumes:
+      - PATH_TO_MUSIC_DIR:/Music:ro
+  front:
+    image: music-player-frontend:latest
+    ports:
+      - "8081:8081"
+    depends_on:
+      - app

@@ -1,0 +1,16 @@
+FROM maven:3.8.6-openjdk-18 as builder
+
+WORKDIR /usr/src
+COPY pom.xml .
+COPY ./backend ./backend
+RUN mvn -B dependency:go-offline
+RUN mvn package -pl backend
+
+
+FROM openjdk:18-oraclelinux8
+
+WORKDIR /app
+COPY --from=builder /usr/src/backend/target/backend-1.0-SNAPSHOT.jar .
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app/backend-1.0-SNAPSHOT.jar"]

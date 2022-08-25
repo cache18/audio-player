@@ -1,0 +1,30 @@
+$icon-size: 100%;
+$button-size: 30px;
+
+.playlists {
+
+  padding: 5px;
+
+  &>* {
+    padding-left: 10px;
+  }
+  .add-files {
+    width: $button-size;
+    height: $button-size;
+    background: url("~src/assets/img/icon_add.png") 0 0 no-repeat;
+    background-size: $icon-size;
+    border: none;
+  }
+
+  .playlist-selected {
+    background-color: lightgray;
+  }
+
+  .playlist-item {
+    display: inline-block;
+    border: 1px solid grey;
+    border-radius: 2px;
+    padding: 10px 5px;
+    cursor: pointer;
+  }
+}

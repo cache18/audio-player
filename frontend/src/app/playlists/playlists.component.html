@@ -1,0 +1,25 @@
+<mat-tab-group mat-align-tabs="start">
+  <mat-tab label="Playlists">
+
+    <div class="playlists" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="left center">
+      <div>
+        <mat-icon (click)="newPlaylist()">add_circle</mat-icon>
+        <mat-icon (click)="selectDir()" *ngIf="playlists.length > 0">library_music</mat-icon>
+        <mat-icon (click)="deletePlaylist()">delete</mat-icon>
+      </div>
+      <div *ngFor="let playlist of playlists" fxLayout="row" class="playlist-item" fxLayoutAlign="left center"
+      [ngClass]="{'playlist-selected': playlist.active}">
+        <div fxLayout="row" fxLayoutGap="4px">
+          <div *ngIf="!playlist.edit">
+            <span (click)="changePlaylist(playlist)">{{playlist.name}}</span>
+          </div>
+          <div *ngIf="playlist.edit" [formGroup]="formGroup">
+            <input type="text" [formControlName]="'name'">
+            <button (click)="acceptPlaylist(playlist.id)"> +</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </mat-tab>
+</mat-tab-group>
