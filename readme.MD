@@ -1,7 +1,7 @@
-Audio Player
+Simple Web Audio Player
 
 ### building (from main directory):
-docker image build -f Dockerfile-backend -t music-player-backend .
+docker image build -f Dockerfile-backend -t music-player-backend . <br/>
 docker image build -f Dockerfile-frontend -t music-player-frontend .
 
 ### running:
